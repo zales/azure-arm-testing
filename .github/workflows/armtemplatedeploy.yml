@@ -41,7 +41,7 @@ jobs:
           region: westeurope
           subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
           template: ./arm-templates/storageaccount.json
-          parameters: ./arm-templates/storageaccount.parameters.json
+          # parameters: ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
 
       - name: Run a one-line script
