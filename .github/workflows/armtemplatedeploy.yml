@@ -30,7 +30,7 @@ jobs:
           scope: subscription
           deploymentName: rg-githubactions
           region: westeurope
-          subscriptionId: 89c3d36a-668d-4d48-a162-830795de0c48
+          subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
           template: ./arm-templates/resourcegroup.json
 
 
