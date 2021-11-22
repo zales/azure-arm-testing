@@ -28,9 +28,9 @@
             "name": "[parameters('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-06-01",
-            "tags": {
-                "displayName": "[parameters('storageAccountName')]"
-            },
+            // "tags": {
+            //     "displayName": "[parameters('storageAccountName')]"
+            // },
             "location": "[parameters('location')]",
             "kind": "StorageV2",
             "sku": {
