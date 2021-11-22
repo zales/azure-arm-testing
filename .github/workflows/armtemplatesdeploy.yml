@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: armTemplateDeploy
 
 # Controls when the workflow will run
 on:
@@ -27,7 +27,13 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
-          enable-AzPSSession: true 
+          enable-AzPSSession: true
+
+      - name: Azure deploy ARM template
+        uses: Azure/cli@v1
+        with:
+          inlinescript: |
+            az deployment sub create --location "westeurope" --template-file ./arm-teplates/resourcesgroup.json
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
