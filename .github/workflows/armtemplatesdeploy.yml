@@ -35,6 +35,16 @@ jobs:
           inlinescript: |
             az deployment sub create --location "westeurope" --template-file ./arm-templates/resourcegroup.json
 
+
+      - name: Deploy Azure Resource Manager (ARM) Template
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          deploymentName: rg-githubactions
+          subscriptionId:  6fbf6081-bf6f-4419-93b2-b19e973cc345
+          template: ./arm-templates/accountstorage.json
+
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Cau lidi!
