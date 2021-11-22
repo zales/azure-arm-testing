@@ -33,7 +33,7 @@ jobs:
         uses: Azure/cli@v1
         with:
           inlinescript: |
-            az deployment sub create --location "westeurope" --template-file ./arm-teplates/resourcesgroup.json
+            az deployment sub create --location "westeurope" --template-file ./arm-templates/resourcesgroup.json
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
