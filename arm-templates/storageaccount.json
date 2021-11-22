@@ -5,7 +5,7 @@
         "storageAccountName": {
             "type": "string",
             "metadata": {
-                "description": "Jmeno storage account"
+                "description": "Jméno storage account"
             }
         },
         "location": {
@@ -35,7 +35,7 @@
             "kind": "StorageV2",
             "sku": {
                 "name": "[parameters('sku')]",
-                "tier": "Standard"
+                "tier": "Premium"
             }
         }
     ],

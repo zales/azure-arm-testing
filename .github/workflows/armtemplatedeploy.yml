@@ -1,0 +1,39 @@
+name: armTemplateDeployment
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS}}
+
+      - name: Azure deploy ARM template
+        uses: Azure/cli@v1
+        with:
+          inlinescript: |
+            az deployment sub create --location "westeurope" --template-file ./arm-templates/resourcegroup.json
+
+      - name: Deploy account storage
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: subscription
+          deploymentName: rg-githubactions
+          region: westeurope
+          subscriptionId: 89c3d36a-668d-4d48-a162-830795de0c48
+          template: ./arm-templates/resourcegroup.json
+
+
+
+      - name: Run a one-line script
+        run: echo Čau, lidi!

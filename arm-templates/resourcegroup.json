@@ -2,19 +2,19 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "location": {
-            "type": "string",
-            "metadata": {
-                "description": "Location nasi RG"
-            },
-            "defaultValue": "westeurope"
-        },
         "resourceGroupName": {
             "type": "string",
             "metadata": {
-                "description": "Jmeno RG"
+                "description": "Jméno RG"
             },
             "defaultValue": "rg-githubactions"
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location naší RG"
+            },
+            "defaultValue": "westeurope"
         }
     },
     "functions": [],
