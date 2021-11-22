@@ -31,10 +31,10 @@
             "tags": {
                 "displayName": "[parameters('storageAccountName')]"
             },
-            "location": "[parameters('storageAccountName')]",
+            "location": "[parameters('location')]",
             "kind": "StorageV2",
             "sku": {
-                "name": "[parameters('location')]",
+                "name": "[parameters('sku')]",
                 "tier": "Standard"
             }
         }
