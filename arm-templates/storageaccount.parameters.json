@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "storageAccountName": {
-            "value": "storage${uniqueString(resourceGroup().id)}" 
+            "value": "StorageTest001"
         },
         "location": {
             "value": "westeurope" 
