@@ -25,6 +25,9 @@ jobs:
 
       - name: Azure Login
         uses: Azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true 
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
