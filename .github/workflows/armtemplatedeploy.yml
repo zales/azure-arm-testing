@@ -61,7 +61,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlinescript: |
-            az keyvault create --name "keyvault-githubactions" --resource-group "rg-githubactions" --location "westeurope"
+            az keyvault create --name "keyvault-githubactionsbflmpsvz" --resource-group "rg-githubactions" --location "westeurope"
 
       - name: Set secret
         uses: Azure/cli@1.0.4
