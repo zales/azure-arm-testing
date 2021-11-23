@@ -10,7 +10,7 @@ env:
   resource_group_name: rg-githubactions
   subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
   location: westeurope
-  vaultName: "${GITHUB_REPOSITORY_OWNER}-keyvault-skoleni"
+  vaultName: "zales-keyvault-skoleni"
 
 jobs:
   armDeploy:
@@ -85,6 +85,7 @@ jobs:
         with:
           inlinescript: |
             az keyvault secret set -n "ADMINPASSWORD" --vault-name ${{ env.vaultName }} --value ${{ secrets.ADMIN_PASSWORD }}
+
       - name: Azure key vault - Get Secrets
         uses: Azure/get-keyvault-secrets@v1
         with:
