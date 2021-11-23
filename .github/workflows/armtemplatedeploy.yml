@@ -35,16 +35,16 @@ jobs:
             resourceGroupName=${{ env.resource_group_name }}
           deploymentName: ${{ env.resource_group_name }}
 
-      # - name: Deploy storage account
-      #   uses: Azure/arm-deploy@v1
-      #   id: storageAccountDeploy
-      #   with:
-      #     scope: resourcegroup
-      #     resourceGroupName: ${{ env.resource_group_name }}
-      #     subscriptionId: ${{ env.subscriptionId }}
-      #     template: ./arm-templates/storageaccount.json
-      #     parameters: ./arm-templates/storageaccount.parameters.json
-      #     deploymentMode: incremental
+      - name: Deploy storage account
+        uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource_group_name }}
+          subscriptionId: ${{ env.subscriptionId }}
+          template: ./arm-templates/storageaccount.json
+          parameters: ./arm-templates/storageaccount.parameters.json
+          deploymentMode: incremental
 
           
       # - name: Deploy VM
