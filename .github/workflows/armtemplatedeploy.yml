@@ -10,7 +10,7 @@ env:
   resource_group_name: rg-githubactions
   subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
   location: westeurope
-  vaultName: ${{ env.GITHUB_REPOSITORY_OWNER }}-keyvault-skoleni
+  vaultName: "${{ env.GITHUB_REPOSITORY_OWNER }}-keyvault-skoleni"
 
 jobs:
   armDeploy:
