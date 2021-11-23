@@ -62,7 +62,24 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlinescript: |
-            az keyvault create --name ${{ env.vaultName }} --resource-group "rg-githubactions" --location "westeurope"
+            # az keyvault create --name ${{ env.vaultName }} --resource-group "rg-githubactions" --location "westeurope"
+
+            echo "==> Create or update Key Vault..."
+            KV_EXISTS=$(
+                az keyvault list \
+                    --query "[?name=='${{ env.vaultName }}'].name" \
+                    --out tsv
+            )
+            if [ -z "$KV_EXISTS" ]; then
+                az keyvault create \
+                    --resource-group "${{ env.resource_group_name }}" \
+                    --name "${{ env.vaultName }}" \
+                    --location " ${{ env.location }}" \
+                    --query 'properties.provisioningState' \
+                    --out tsv
+            else
+                echo "The specified vault: $${{ env.vaultName }} already exists (skipping)"
+            fi
 
       - name: Set secret
         uses: Azure/cli@1.0.4
