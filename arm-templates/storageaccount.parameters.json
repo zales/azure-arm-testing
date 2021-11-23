@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "storageAccountName": {
-            "value": "glostg003" 
+            "value": "glostg003bflmpsvz164342" 
         },
         "location": {
             "value": "westeurope" 
