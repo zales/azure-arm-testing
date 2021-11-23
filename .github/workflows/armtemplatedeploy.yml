@@ -35,40 +35,40 @@ jobs:
             resourceGroupName=${{ env.resource_group_name }}
           deploymentName: ${{ env.resource_group_name }}
 
-      - name: Deploy storage account
-        uses: Azure/arm-deploy@v1
-        id: storageAccountDeploy
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionId: ${{ env.subscriptionId }}
-          template: ./arm-templates/storageaccount.json
-          parameters: ./arm-templates/storageaccount.parameters.json
-          deploymentMode: incremental
+      # - name: Deploy storage account
+      #   uses: Azure/arm-deploy@v1
+      #   id: storageAccountDeploy
+      #   with:
+      #     scope: resourcegroup
+      #     resourceGroupName: ${{ env.resource_group_name }}
+      #     subscriptionId: ${{ env.subscriptionId }}
+      #     template: ./arm-templates/storageaccount.json
+      #     parameters: ./arm-templates/storageaccount.parameters.json
+      #     deploymentMode: incremental
 
           
-      - name: Deploy VM
-        uses: Azure/arm-deploy@v1
-        with:
-          scope: resourcegroup
-          resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionId: ${{ env.subscriptionId }}
-          template: ./arm-templates/virtualmachine.json
-          parameters: 
-            adminPassword=${{ secrets.ADMIN_PASSWORD }}
-          deploymentMode: incremental
+      # - name: Deploy VM
+      #   uses: Azure/arm-deploy@v1
+      #   with:
+      #     scope: resourcegroup
+      #     resourceGroupName: ${{ env.resource_group_name }}
+      #     subscriptionId: ${{ env.subscriptionId }}
+      #     template: ./arm-templates/virtualmachine.json
+      #     parameters: 
+      #       adminPassword=${{ secrets.ADMIN_PASSWORD }}
+      #     deploymentMode: incremental
 
-      - name: Set secret
-        uses: Azure/cli@1.0.4
-        with:
-          inlinescript: |
-            az keyvault secret set -n "ADMINPASSWORD" --vault-name "keyvault-githubactions2" --value "Heslo123."
+      # - name: Set secret
+      #   uses: Azure/cli@1.0.4
+      #   with:
+      #     inlinescript: |
+      #       az keyvault secret set -n "ADMINPASSWORD" --vault-name "keyvault-githubactions2" --value "Heslo123."
 
-      - name: Azure key vault - Get Secrets
-        uses: Azure/get-keyvault-secrets@v1
-        with:
-          keyvault: "keyvault-githubactions2"
-          secrets: 'ADMINPASSWORD'
-        id: getAzureKeyVaultSecrets
+      # - name: Azure key vault - Get Secrets
+      #   uses: Azure/get-keyvault-secrets@v1
+      #   with:
+      #     keyvault: "keyvault-githubactions2"
+      #     secrets: 'ADMINPASSWORD'
+      #   id: getAzureKeyVaultSecrets
 
-      - run: echo ${{ steps.getAzureKeyvaultSecrets.outputs.ADMINPASSWORD}}
+      # - run: echo ${{ steps.getAzureKeyvaultSecrets.outputs.ADMINPASSWORD}}
