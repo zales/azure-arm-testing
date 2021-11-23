@@ -6,6 +6,10 @@ on:
         - main
 
   workflow_dispatch:
+env:
+  reource_group_name: rg-githubactions
+  subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
+
 
 jobs:
   armDeploy:
@@ -19,34 +23,48 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Azure deploy ARM template
+        uses: Azure/cli@v1
+        with:
+          inlinescript: |
+            az deployment sub create --location "westeurope" --template-file ./arm-templates/resourcegroup.json
+
       - name: Deploy resource group
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
-          deploymentName: rg-githubactions
+          deploymentName: ${{ env.resource_group_name }}
           region: westeurope
-          subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
+          subscriptionId: $ {{ env.subscriptionId}}
           template: ./arm-templates/resourcegroup.json
 
-      # - name: Deploy storage account
-      #   uses: Azure/arm-deploy@v1
-      #   id: storageAccountDeploy
-      #   with:
-      #     scope: resourcegroup
-      #     resourceGroupName: rg-githubactions
-      #     region: westeurope
-      #     subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
-      #     template: ./arm-templates/storageaccount.json
-      #     parameters: ./arm-templates/storageaccount.parameters.json
-      #     deploymentMode: incremental
-
-
-      # - name: Set secret
-      #   uses: Azure/cli@1.0.4
-      #   with:
-      #     inlinescript: |
-      #       az keyvault secret set -n "ADMINPASSWORD" --vault-name "keyvault-githubactions"  --value "Heslo123."
-
-            
+      - name: Deploy storage account
+        uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource_group_name }}
+          region: westeurope
+          subscriptionId: $ {{ env.subscriptionId}}
+          template: ./arm-templates/storageaccount.json
+          parameters: ./arm-templates/storageaccount.parameters.json
+          deploymentMode: incremental
 
           
+      - name: Deploy VM
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ env.resource_group_name }}
+          region: westeurope
+          subscriptionId: $ {{ env.subscriptionId}}
+          template: ./arm-templates/virtualmachine.json
+          parameters:
+            adminPassword=${{ secrets.ADMIN_PASSWORD }}
+          deploymentMode: incremental
+
+      - name: Deploy Key Vault
+        uses: Azure/cli@1.0.4
+        with:
+          inlinescript: |
+            az keyvault create --name "keyvault-githubactions2" --resource-group "${{ env.resource_grou_name }}" --location "japanwest"
