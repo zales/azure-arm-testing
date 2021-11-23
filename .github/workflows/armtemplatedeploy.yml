@@ -41,11 +41,11 @@ jobs:
       #     deploymentMode: incremental
 
 
-      - name: Set secret
-        uses: Azure/cli@1.0.4
-        with:
-          inlinescript: |
-            az keyvault secret set -n "ADMINPASSWORD" --vault-name "keyvault-githubactions"  --value "Heslo123."
+      # - name: Set secret
+      #   uses: Azure/cli@1.0.4
+      #   with:
+      #     inlinescript: |
+      #       az keyvault secret set -n "ADMINPASSWORD" --vault-name "keyvault-githubactions"  --value "Heslo123."
 
             
 
