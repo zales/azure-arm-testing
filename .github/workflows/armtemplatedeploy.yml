@@ -85,7 +85,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlinescript: |
-            az keyvault secret set -n "ADMINPASSWORD" --vault-name "${{ env.vaultName }} --value "Heslo123."
+            az keyvault secret set -n "ADMINPASSWORD" --vault-name ${{ env.vaultName }} --value "Heslo123."
 
       - name: Azure key vault - Get Secrets
         uses: Azure/get-keyvault-secrets@v1
