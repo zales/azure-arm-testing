@@ -28,17 +28,17 @@ jobs:
           subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
           template: ./arm-templates/resourcegroup.json
 
-      - name: Deploy storage account
-        uses: Azure/arm-deploy@v1
-        id: storageAccountDeploy
-        with:
-          scope: resourcegroup
-          resourceGroupName: rg-githubactions
-          region: westeurope
-          subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
-          template: ./arm-templates/storageaccount.json
-          parameters: ./arm-templates/storageaccount.parameters.json
-          deploymentMode: incremental
+      # - name: Deploy storage account
+      #   uses: Azure/arm-deploy@v1
+      #   id: storageAccountDeploy
+      #   with:
+      #     scope: resourcegroup
+      #     resourceGroupName: rg-githubactions
+      #     region: westeurope
+      #     subscriptionId: 6fbf6081-bf6f-4419-93b2-b19e973cc345
+      #     template: ./arm-templates/storageaccount.json
+      #     parameters: ./arm-templates/storageaccount.parameters.json
+      #     deploymentMode: incremental
 
 
       - name: Set secret
