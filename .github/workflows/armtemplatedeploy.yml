@@ -2,12 +2,13 @@ name: armTemplateDeployment
 
 on:
   push:
-    branches: [ main ]
+    branches:
+        - main
 
   workflow_dispatch:
 
 jobs:
-  build:
+  armDeploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,13 +17,7 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS}}
-
-      - name: Azure deploy ARM template
-        uses: Azure/cli@v1
-        with:
-          inlinescript: |
-            az deployment sub create --location "westeurope" --template-file ./arm-templates/resourcegroup.json
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy resource group
         uses: Azure/arm-deploy@v1
@@ -45,4 +40,13 @@ jobs:
           parameters: ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
 
-      - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri}}
+
+      - name: Set secret
+        uses: Azure/cli@1.0.4
+        with:
+          inlinescript: |
+            az keyvault secret set -n "ADMINPASSWORD" --vault-name "keyvault-githubactions"  --value "Heslo123."
+
+            
+
+          
